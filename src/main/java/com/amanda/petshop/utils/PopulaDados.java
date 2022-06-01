@@ -17,6 +17,10 @@ import com.amanda.petshop.repository.EspecieRepository;
 import com.amanda.petshop.repository.PetRepository;
 import com.amanda.petshop.repository.ProdutoRepository;
 import com.amanda.petshop.repository.RacaRepository;
+import com.amanda.petshop.domain.Cidade;
+import com.amanda.petshop.domain.Estado;
+import com.amanda.petshop.repository.CidadeRepository;
+import com.amanda.petshop.repository.EstadoRepository;
 
 @Component
 public class PopulaDados {
@@ -36,6 +40,11 @@ public class PopulaDados {
 	@Autowired
 	PetRepository petRepository;
 	
+	@Autowired
+	EstadoRepository estadoRepository;
+	
+	@Autowired
+	CidadeRepository cidadeRepository;
 	
 	@PostConstruct
 	public void cadastrar() {
@@ -75,7 +84,19 @@ public class PopulaDados {
 		especieRepository.saveAll(Arrays.asList(esp1, esp2));
 		racaRepository.saveAll(Arrays.asList(rac1, rac2, rac3));
 		
-		petRepository.saveAll(Arrays.asList(pet1, pet2, pet3));		
+		petRepository.saveAll(Arrays.asList(pet1, pet2, pet3));
+		
+		Estado est1 = new Estado(null, "Minas Gerais");
+		Estado est2 = new Estado(null, "São Paulo");
+		
+		Cidade c1 = new Cidade(null, "Belo Horizonte", est1);
+		Cidade c2 = new Cidade(null, "Capelinha", est1);
+		Cidade c3 = new Cidade(null, "São Paulo", est2);
+		
+		est1.getCidades().addAll(Arrays.asList(c1, c2));
+		est2.getCidades().addAll(Arrays.asList(c3));
+		
+		estadoRepository.saveAll(Arrays.asList(est1, est2));
+		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 	}
-
 }
