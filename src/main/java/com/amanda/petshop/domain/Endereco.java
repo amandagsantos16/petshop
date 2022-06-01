@@ -9,11 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.amanda.petshop.domain.Endereco;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class Endereco implements Serializable{
-	
+public class Endereco implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -22,19 +25,20 @@ public class Endereco implements Serializable{
 	private String complemento;
 	private String bairro;
 	private String cep;
-	
+
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_pessoa")
 	private Pessoa pessoa;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_cidade")
 	private Cidade cidade;
-		
+
 	public Endereco() {
-		
+
 	}
-	
+
 	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
 			Pessoa pessoa, Cidade cidade) {
 		super();
@@ -136,5 +140,4 @@ public class Endereco implements Serializable{
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	
 }
