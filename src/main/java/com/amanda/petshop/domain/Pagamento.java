@@ -11,25 +11,27 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.amanda.petshop.domain.enuns.SituacaoPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Pagamento implements Serializable{
-	
+public abstract class Pagamento implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private Integer id;
-	private Double valor;	
+	private Double valor;
 	private Integer situacao;
-	
+
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name = "id_servico")
 	@MapsId
 	private Servico servico;
-	
+
 	public Pagamento() {
-		
+
 	}
 
 	public Pagamento(Integer id, Double valor, SituacaoPagamento situacao, Servico servico) {
@@ -95,6 +97,6 @@ public abstract class Pagamento implements Serializable{
 
 	public void setServico(Servico servico) {
 		this.servico = servico;
-	}	
-	
+	}
+
 }
