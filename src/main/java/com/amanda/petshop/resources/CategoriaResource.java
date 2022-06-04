@@ -46,5 +46,4 @@ public class CategoriaResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-
 }
